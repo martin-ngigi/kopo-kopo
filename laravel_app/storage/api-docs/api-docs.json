@@ -14,7 +14,7 @@
     },
     "servers": [
         {
-            "url": "http://127.0.0.1:8000/api/v1",
+            "url": "http://127.0.0.1:8000",
             "description": "Demo API Server"
         }
     ],
@@ -22,7 +22,7 @@
         "/api/v1/transactions": {
             "get": {
                 "summary": "Get example data",
-                "operationId": "e91569cd6d6b7cf293a223b5a7a7e306",
+                "operationId": "29e9645c672e2f86a371f75f96a9c218",
                 "responses": {
                     "200": {
                         "description": "Successful operation"

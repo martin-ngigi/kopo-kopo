@@ -7,17 +7,21 @@ use Illuminate\Http\Request;
 
 class TransactionAPIController extends Controller
 {
-    //
-  /**
+        //
+    /**
      * @OA\Get(
      *     path="/api/v1/transactions",
      *     summary="Get example data",
      *     @OA\Response(response="200", description="Successful operation")
      * )
      */
-    public function getExampleData() {
-        // Your code here
-        // return response()->json(['message' => 'Hello World!']);
-        return "Hello World!";
-    }
+public function getTransactions() {
+
+    $transactions = [
+        ['id' => 1, 'amount' => 100.00, 'description' => 'Transaction 1'],
+        ['id' => 2, 'amount' => 150.50, 'description' => 'Transaction 2'],
+    ];
+
+    return response()->json($transactions);
+}
 }

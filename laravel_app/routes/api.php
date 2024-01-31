@@ -19,4 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/v1/transactions', [TransactionAPIController::class, 'getExampleData']);
+Route::get('/v1/transactions', [TransactionAPIController::class, 'getTransactions']);
