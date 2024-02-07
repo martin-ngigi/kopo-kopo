@@ -75,7 +75,7 @@ npm run test
 - results:
 Test results        
 :-------------------------:
-<img src="screenshots/CypressTests.png" height="300"> 
+<img src="cypress/screenshots/CypressTests.png" height="300"> 
 
 # creating PhpUnit tests
 ```
