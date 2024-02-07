@@ -24,4 +24,21 @@ class Transaction extends Model
         'account_id',
         'amount'
     ];
+
+    protected $table = 'transactions';
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+    }
+
+    public function has(array $attributes): bool
+    {
+        return $this->where($attributes)->exists();
+    }
+
+    // public function has($item)
+    // {
+    //     return in_array($item, $this->items);
+    // }
 }

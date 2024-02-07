@@ -76,3 +76,12 @@ npm run test
 Test results        
 :-------------------------:
 <img src="screenshots/CypressTests.png" height="300"> 
+
+# creating PhpUnit tests
+```
+php artisan make:test TransactionTest
+```
+# Running PhpUnit tests
+```
+ ./vendor/bin/phpunit
+ ```

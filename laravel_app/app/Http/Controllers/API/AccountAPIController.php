@@ -59,9 +59,9 @@ class AccountAPIController extends Controller
     public function createAccount(Request $request){
         try{
             // Check Content-Type header 
-            if (!$request->header('Content-Type') == 'application/json') {
-                return response()->json(['error' => 'Unsupported Media Type. Use Content-Type: application/json'], 415);
-            }
+            // if (!$request->header('Content-Type') == 'application/json') {
+            //     return response()->json(['error' => 'Unsupported Media Type. Use Content-Type: application/json'], 415);
+            // }
 
             // Check Content-Type header 
             if (!$request->header('Content-Type') == 'application/json') {
