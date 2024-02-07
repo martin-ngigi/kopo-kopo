@@ -89,4 +89,4 @@ php artisan make:test TransactionTest
 
 PhpUnit Test results        
 :-------------------------:
-<img src="screenshots/phpunitTest.png" height="300"> 
+<img src="screenshorts/phpunitTest.png" height="300"> 
