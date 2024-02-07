@@ -19,15 +19,506 @@
         }
     ],
     "paths": {
-        "/api/v1/transactions": {
+        "/api/ping": {
             "get": {
-                "summary": "Get example data",
-                "operationId": "29e9645c672e2f86a371f75f96a9c218",
+                "tags": [
+                    "Ping"
+                ],
+                "summary": "Ping connection test",
+                "operationId": "d211ededbd43c1e75128236002811d84",
                 "responses": {
                     "200": {
-                        "description": "Successful operation"
+                        "description": "Healthcheck to make sure the server is up"
                     }
                 }
+            }
+        },
+        "/api/accounts": {
+            "get": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "Get accounts data",
+                "operationId": "3cf5a07bbeae39e1115a0171989b62ea",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "account_id": {
+                                                "type": "string",
+                                                "example": "0afd02d3-6c59-46e7-b7bc-893c5e0b7ac2"
+                                            },
+                                            "balance": {
+                                                "type": "integer",
+                                                "example": 7
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "account_id": "0afd02d3-6c59-46e7-b7bc-893c5e0b7ac2",
+                                        "balance": 7
+                                    },
+                                    {
+                                        "account_id": "5ae0ef78-e902-4c40-9f53-8cf910587312",
+                                        "balance": -4
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "create account",
+                "operationId": "c42e7dacd2256c83944569ad894737e8",
+                "responses": {
+                    "200": {
+                        "description": "Create new account",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "application/json"
+                                },
+                                "example": {
+                                    "account_id": "0afd02d3-6c59-46e7-b7bc-893c5e0b7ac2",
+                                    "amount": 7
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/accounts/{account_id}": {
+            "get": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "Get a transaction by account_id",
+                "operationId": "44ae4ce99c0ab35e2ecfc19af91907ea",
+                "parameters": [
+                    {
+                        "name": "account_id",
+                        "in": "path",
+                        "description": "ID of the account",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "0afd02d3-6c59-46e7-b7bc-893c5e0b7ac2"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Account_id retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Account_id retrieved successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "account_id": {
+                                                    "type": "string",
+                                                    "format": "uuid",
+                                                    "example": "0afd02d3-6c59-46e7-b7bc-893c5e0b7ac2"
+                                                },
+                                                "balance": {
+                                                    "type": "number",
+                                                    "example": 17
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Account_id not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Account not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/transactions": {
+            "get": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "create transactions data",
+                "operationId": "b6258bc524afd90b25fb20b8ffb467ad",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "transaction_id": {
+                                                "type": "string",
+                                                "example": "4bcc3959-6fe1-406e-9f04-cad2637b47d5"
+                                            },
+                                            "account_id": {
+                                                "type": "string",
+                                                "example": "0afd02d3-6c59-46e7-b7bc-893c5e0b7ac2"
+                                            },
+                                            "amount": {
+                                                "type": "integer",
+                                                "example": 7
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "example": "2021-05-12T18:29:40.206924+00:00"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "transaction_id": "4bcc3959-6fe1-406e-9f04-cad2637b47d5",
+                                        "account_id": "0afd02d3-6c59-46e7-b7bc-893c5e0b7ac2",
+                                        "amount": 7,
+                                        "created_at": "2021-05-12T18:29:40.206924+00:00"
+                                    },
+                                    {
+                                        "transaction_id": "050a75f6-8df1-4ad1-8f5b-54e821e98581",
+                                        "account_id": "5ae0ef78-e902-4c40-9f53-8cf910587312",
+                                        "amount": -4,
+                                        "created_at": "2021-05-18T21:33:47.203136+00:00"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Create a new transaction",
+                "operationId": "7b7b1ce75b258cd745723e9c62ca2914",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "anyOf": [
+                                    {
+                                        "$ref": "#/components/schemas/TransactionRequestWithPositiveAmount"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/TransactionRequestWithNegativeAmount"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Transaction created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Transaction created successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "transaction_id": {
+                                                    "type": "string",
+                                                    "format": "uuid",
+                                                    "example": "generated-uuid"
+                                                },
+                                                "account_id": {
+                                                    "type": "string",
+                                                    "format": "uuid",
+                                                    "example": "0afd02d3-6c59-46e7-b7bc-893c5e0b7ac2"
+                                                },
+                                                "amount": {
+                                                    "type": "number",
+                                                    "example": 7
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Mandatory body parameters missing or have incorrect type."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "Method not allowed. This status code should be returned when using the wrong HTTP method."
+                    },
+                    "415": {
+                        "description": "Invalid content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Specified content type not allowed."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/transactions/{transaction_id}": {
+            "get": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Get a transaction by transaction_id",
+                "operationId": "6944ce6fd30ce0a6330eac647f4d58b6",
+                "parameters": [
+                    {
+                        "name": "transaction_id",
+                        "in": "path",
+                        "description": "ID of the transaction",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "0afd02d3-6c59-46e7-b7bc-893c5e0b7ac2"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Transaction retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Transaction retrieved successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "transaction_id": {
+                                                    "type": "string",
+                                                    "format": "uuid",
+                                                    "example": "generated-uuid"
+                                                },
+                                                "account_id": {
+                                                    "type": "string",
+                                                    "format": "uuid",
+                                                    "example": "0afd02d3-6c59-46e7-b7bc-893c5e0b7ac2"
+                                                },
+                                                "amount": {
+                                                    "type": "number",
+                                                    "example": 7
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Transaction not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Transaction not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "TransactionRequest": {
+                "title": "Transaction Request",
+                "description": "Request payload for creating a transaction",
+                "properties": {
+                    "account_id": {
+                        "description": "Account ID (UUID)",
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "amount": {
+                        "description": "Transaction Amount",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "Transaction": {
+                "title": "Transaction",
+                "description": "Transaction details",
+                "properties": {
+                    "transaction_id": {
+                        "description": "Transaction ID (UUID)",
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "account_id": {
+                        "description": "Account ID (UUID)",
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "amount": {
+                        "description": "Transaction Amount",
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "description": "Transaction creation timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "ArrayOfTransactions": {
+                "title": "Array of Transactions",
+                "description": "An array of transaction details",
+                "properties": {
+                    "transaction_id": {
+                        "description": "Transaction ID (UUID)",
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "account_id": {
+                        "description": "Account ID (UUID)",
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "amount": {
+                        "description": "Transaction Amount",
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "description": "Transaction creation timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "Account": {
+                "title": "Account",
+                "description": "Account details",
+                "properties": {
+                    "account_id": {
+                        "description": "Account ID (UUID)",
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "balance": {
+                        "description": "Account Balance",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "TransactionRequestWithPositiveAmount": {
+                "required": [
+                    "account_id",
+                    "amount"
+                ],
+                "properties": {
+                    "account_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "0afd02d3-6c59-46e7-b7bc-893c5e0b7ac2"
+                    },
+                    "amount": {
+                        "type": "number",
+                        "example": 7
+                    }
+                },
+                "type": "object"
+            },
+            "TransactionRequestWithNegativeAmount": {
+                "required": [
+                    "account_id",
+                    "amount"
+                ],
+                "properties": {
+                    "account_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "0afd02d3-6c59-46e7-b7bc-893c5e0b7ac2"
+                    },
+                    "amount": {
+                        "type": "number",
+                        "example": -7
+                    }
+                },
+                "type": "object"
             }
         }
     },

@@ -1,0 +1,12 @@
+{
+  "name": "kopo-kopo",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "cd app && composer update && composer install",
+    "start": "cd app && php artisan serve",
+    "test": "cypress run"
+  },
+  "devDependencies": {
+    "cypress": "^12.17.1"
+  }
+}
