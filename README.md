@@ -85,3 +85,8 @@ php artisan make:test TransactionTest
 ```
  ./vendor/bin/phpunit
  ```
+ - results:
+
+PhpUnit Test results        
+:-------------------------:
+<img src="screenshots/phpunitTest.png" height="300"> 
